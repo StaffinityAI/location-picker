@@ -18,8 +18,12 @@ class LocationPicker {
     if (method == PickerMethods.nominatimMethod) {
       return searchByName(street: '$streetNumber $street', zipcode: zipcode);
     } else if (method == PickerMethods.googleMapsMethod) {
-      return googlePlacesSearch(
-          street: street, streetNumber: streetNumber, city: city, zipcode: zipcode, apiKey: googleMapsApiKey!);
+      if (googleMapsApiKey != null) {
+        return googlePlacesSearch(
+            street: street, streetNumber: streetNumber, city: city, zipcode: zipcode, apiKey: googleMapsApiKey!);
+      } else {
+        throw 'Please Add Google Maps Api Key!';
+      }
     }
   }
 
@@ -31,7 +35,13 @@ class LocationPicker {
       required PickerMethods method}) {
     if (method == PickerMethods.nominatimMethod) {
       return reverseGeocoding(points);
-    } else if (method == PickerMethods.googleMapsMethod) {}
+    } else if (method == PickerMethods.googleMapsMethod) {
+      if (googleMapsApiKey != null) {
+        googlePlacesReverseGeoSearch(points, googleMapsApiKey!);
+      } else {
+        throw 'Please Add Google Maps Api Key!';
+      }
+    }
   }
 }
 
