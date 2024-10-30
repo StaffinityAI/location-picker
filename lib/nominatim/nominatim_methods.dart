@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:osm_nominatim/osm_nominatim.dart';
 
 Future<Map<String, dynamic>> searchByName({
@@ -35,6 +36,37 @@ Future<Map<String, dynamic>> searchByName({
       'geoPoint': geoPoint,
       'geohash': geoFirePoint.data['geohash'],
     };
+  } catch (e) {
+    throw e.toString();
+  }
+}
+
+reverseGeocoding(LatLng points) async {
+  try {
+    final reverseSearchResult = await Nominatim.reverseSearch(
+      lat: points.latitude,
+      lon: points.longitude,
+      addressDetails: true,
+      extraTags: true,
+      nameDetails: true,
+    );
+
+    if (reverseSearchResult.address == null) {
+      throw 'Address Not Found!';
+    } else {
+      final addressMap = reverseSearchResult.address!;
+      final geoPoint = GeoPoint(points.latitude, points.longitude);
+      final GeoFirePoint geoFirePoint = GeoFirePoint(geoPoint);
+      return {
+        'street': addressMap['road'],
+        'streetNumber': addressMap['house_number'],
+        'zipcode': addressMap['postcode'],
+        'city': addressMap['city'],
+        'country': addressMap['country'],
+        'geoPoint': geoPoint,
+        'geohash': geoFirePoint.data['geohash']
+      };
+    }
   } catch (e) {
     throw e.toString();
   }
