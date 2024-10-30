@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.2.2
   osm_nominatim: ^3.0.1
   geoflutterfire_plus: ^0.0.31
   firebase_cloud_firestore: ^5.4.4
