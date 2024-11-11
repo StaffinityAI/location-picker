@@ -16,7 +16,7 @@ class LocationPicker {
       required String zipcode,
       required PickerMethods method}) {
     if (method == PickerMethods.nominatimMethod) {
-      return searchByName(street: '$streetNumber $street', zipcode: zipcode);
+      return searchByName(street: '$streetNumber $street', zipcode: zipcode, city: city);
     } else if (method == PickerMethods.googleMapsMethod) {
       if (googleMapsApiKey != null) {
         return googlePlacesSearch(

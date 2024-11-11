@@ -8,11 +8,13 @@ import 'package:osm_nominatim/osm_nominatim.dart';
 Future<Map<String, dynamic>> searchByName({
   required String street,
   required String zipcode,
+  String? city,
 }) async {
   try {
     final searchResult = await Nominatim.searchByName(
         street: street,
         postalCode: zipcode,
+        city: city,
         country: 'Germany',
         limit: 1,
         addressDetails: true,
