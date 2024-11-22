@@ -9,7 +9,7 @@ class LocationPicker {
   static pickLocationFromAddress(
       {required String street,
       required String streetNumber,
-      String? city,
+      required String city,
 
       /// ONLY REQUIRED WHEN USING [PickerMethods.googleMapsMethod]
       String? googleMapsApiKey,
