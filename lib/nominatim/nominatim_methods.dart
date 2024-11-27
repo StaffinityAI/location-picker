@@ -57,6 +57,7 @@ reverseGeocoding(LatLng points) async {
       throw 'Address Not Found!';
     } else {
       final addressMap = reverseSearchResult.address!;
+      log('SELECTED ADDRESS:: $addressMap');
       final geoPoint = GeoPoint(points.latitude, points.longitude);
       final GeoFirePoint geoFirePoint = GeoFirePoint(geoPoint);
       return {
