@@ -32,8 +32,8 @@ Future<Map<String, dynamic>> searchByName({
     return {
       'street': addressMap['road'],
       'streetNumber': addressMap['house_number'],
-      'zipcode': addressMap['postcode'],
-      'city': addressMap['city'],
+      'zipcode': addressMap['postcode'] ?? zipcode,
+      'city': addressMap['city'] ?? city,
       'country': addressMap['country'],
       'geoPoint': geoPoint,
       'geohash': geoFirePoint.data['geohash'],
